@@ -1,6 +1,6 @@
 ---
 - name: Update VPS Machines
-  hosts: lerin
+  hosts: all_servers
   become: true
   tasks:
     - name: Update and upgrade packages
