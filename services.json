@@ -1,0 +1,74 @@
+{
+  "services_jellyfin": [
+    {
+      "service_name": "plex",
+      "docker_image": "plexinc/pms-docker:latest",
+      "service_path": "/home/jellyfin/applications/plex"
+    },
+    {
+      "service_name": "transmission",
+      "docker_image": "lscr.io/linuxserver/transmission:latest",
+      "service_path": "/home/jellyfin/applications/transmission"
+    }
+  ],
+  "services_dobby": [
+    {
+      "service_name": "pihole",
+      "docker_image": "pihole/pihole:latest",
+      "service_path": "/root/applications/pihole"
+    },
+    {
+      "service_name": "nginx-proxy-manager",
+      "docker_image": "jc21/nginx-proxy-manager:latest",
+      "service_path": "/root/applications/nginx-proxy"
+    },
+    {
+      "service_name": "uptimekuma",
+      "docker_image": "louislam/uptime-kuma:1",
+      "service_path": "/root/applications/uptimekuma"
+    },
+    {
+      "service_name": "dockge",
+      "docker_image": "louislam/dockge:1",
+      "service_path": "/root/applications/dockge"
+    }
+  ],
+  "services_pihole": [
+    {
+      "service_name": "pihole",
+      "docker_image": "pihole/pihole:latest",
+      "service_path": "/root/applications/pihole"
+    }
+  ],
+  "services_dns": [
+    {
+      "service_name": "pihole",
+      "docker_image": "pihole/pihole:latest",
+      "service_path": "/root/applications/pihole"
+    }
+  ],
+  "services_db": [
+    {
+      "service_name": "mariabdb",
+      "docker_image": "mariadb:latest",
+      "service_path": "/root/mariadb30"
+    },
+    {
+      "service_name": "pma",
+      "docker_image": "phpmyadmin/phpmyadmin:latest",
+      "service_path": "/root/mariadb30"
+    }
+  ],
+  "services_docky": [
+    {
+      "service_name": "nginx-proxy-manager",
+      "docker_image": "jc21/nginx-proxy-manager:latest",
+      "service_path": "/root/applications/nginx-proxy"
+    },
+    {
+      "service_name": "dockge",
+      "docker_image": "louislam/dockge:1",
+      "service_path": "/root/applications/dockge"
+    }
+  ]
+}

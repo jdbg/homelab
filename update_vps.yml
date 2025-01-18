@@ -1,0 +1,15 @@
+---
+- name: Update VPS Machines
+  hosts: lerin
+  become: true
+  tasks:
+    - name: Update and upgrade packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+      when: ansible_os_family == "Debian"
+
+    # - name: Reboot if needed
+    #   reboot:
+    #     reboot_timeout: 300
+    #     msg: "System updated and requires a reboot"

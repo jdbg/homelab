@@ -1,0 +1,35 @@
+---
+- name: Update and Manage Docker Services
+  hosts: "{{ target_host }}" # Dynamic host
+  become: true
+
+  tasks:
+    - name: Ensure directories for services exist
+      file:
+        path: "{{ item.service_path }}"
+        state: directory
+      loop: "{{ lookup('vars', services_var) }}"
+
+    - name: Pull the latest Docker images
+      shell: |
+        docker pull {{ item.docker_image }}
+      args:
+        chdir: "{{ item.service_path }}"
+        executable: /bin/bash
+      loop: "{{ lookup('vars', services_var) }}"
+
+    - name: Stop Docker Compose services
+      shell: |
+        docker compose down
+      args:
+        chdir: "{{ item.service_path }}"
+        executable: /bin/bash
+      loop: "{{ lookup('vars', services_var) }}"
+
+    - name: Start Docker Compose services
+      shell: |
+        docker compose up -d
+      args:
+        chdir: "{{ item.service_path }}"
+        executable: /bin/bash
+      loop: "{{ lookup('vars', services_var) }}"

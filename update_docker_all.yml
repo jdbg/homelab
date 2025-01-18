@@ -1,0 +1,29 @@
+---
+- name: Update Services on Multiple Hosts
+  hosts: localhost
+  tasks:
+    - name: Update services on dobby
+      command:
+        cmd: >
+          ansible-playbook -i inventory.ini update_docker.yml
+          -e "@services.json"
+          -e "target_host=dobby"
+          -e "services_var=services_dobby"
+      register: dobby_result
+
+    - name: Print result for dobby
+      debug:
+        var: dobby_result.stdout_lines
+
+    - name: Update services on jellyfin
+      command:
+        cmd: >
+          ansible-playbook -i inventory.ini update_docker.yml
+          -e "@services.json"
+          -e "target_host=jellyfin"
+          -e "services_var=services_jellyfin"
+      register: jellyfin_result
+
+    - name: Print result for jellyfin
+      debug:
+        var: jellyfin_result.stdout_lines
