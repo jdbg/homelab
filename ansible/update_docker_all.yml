@@ -79,3 +79,18 @@
     - name: Print result for pihole
       debug:
         var: pihole_result.stdout_lines
+
+    - name: Check for any failures
+      fail:
+        msg: "Failed hosts: {{ failed_hosts | join(', ') }}"
+      vars:
+        failed_hosts: >-
+          {{ 
+          (dobby_result.failed | default(false) | ternary(['dobby'], [])) +
+          (jellyfin_result.failed | default(false) | ternary(['jellyfin'], [])) +
+          (dns_result.failed | default(false) | ternary(['dns'], [])) +
+          (docky_result.failed | default(false) | ternary(['docky'], [])) +
+          (db_result.failed | default(false) | ternary(['db'], [])) +
+          (pihole_result.failed | default(false) | ternary(['pihole'], []))
+          }}
+      when: failed_hosts | length > 0
