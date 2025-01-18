@@ -27,3 +27,55 @@
     - name: Print result for jellyfin
       debug:
         var: jellyfin_result.stdout_lines
+
+    - name: Update services on dns
+      command:
+        cmd: >
+          ansible-playbook -i inventory.ini update_docker.yml
+          -e "@services.json"
+          -e "target_host=dns"
+          -e "services_var=services_dns"
+      register: dns_result
+
+    - name: Print result for dns
+      debug:
+        var: dns_result.stdout_lines
+
+    - name: Update services on docky
+      command:
+        cmd: >
+          ansible-playbook -i inventory.ini update_docker.yml
+          -e "@services.json"
+          -e "target_host=docky"
+          -e "services_var=services_docky"
+      register: docky_result
+
+    - name: Print result for docky
+      debug:
+        var: docky_result.stdout_lines
+
+    - name: Update services on db
+      command:
+        cmd: >
+          ansible-playbook -i inventory.ini update_docker.yml
+          -e "@services.json"
+          -e "target_host=db"
+          -e "services_var=services_db"
+      register: db_result
+
+    - name: Print result for db
+      debug:
+        var: db_result.stdout_lines
+
+    - name: Update services on pihole
+      command:
+        cmd: >
+          ansible-playbook -i inventory.ini update_docker.yml
+          -e "@services.json"
+          -e "target_host=pihole"
+          -e "services_var=services_pihole"
+      register: pihole_result
+
+    - name: Print result for pihole
+      debug:
+        var: pihole_result.stdout_lines
